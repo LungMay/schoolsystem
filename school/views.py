@@ -1,5 +1,7 @@
+from multiprocessing import context
 from django.shortcuts import render  # ດຶງມາຈາກ template
 from django.http import HttpResponse  # ຂຽນເທິງກະດານ
+from .models import ExamScore
 
 # Create your views here.
 def HomePage(request) :
@@ -14,5 +16,8 @@ def ContactPage(request) :
      #return HttpResponse('Contact Page')
      return render(request, 'school/contact.html')
 
-#def persons(request) :
- #   return HttpResponse('Persons Page')
+def ShowScore(request) :
+     #return HttpResponse('Persons Page')
+     score = ExamScore.objects.all() #ດຶງຄ່າມາຈາກ Database ທັງໝົດ
+     context = {'score':score}
+     return render(request, 'school/showscore.html', context)
